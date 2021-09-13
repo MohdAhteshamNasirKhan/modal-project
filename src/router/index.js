@@ -1,14 +1,14 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+// import Home from '../views/Home.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home
+    name: 'LoginNext',
+    component: () => import(/* webpackChunkName: "about" */ '../views/LoginNext.vue')
   },
   {
     path: '/about',
@@ -44,9 +44,9 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/PostPage.vue')
   },
   {
-    path: '/loginext',
-    name: 'Loginext',
-    component: () => import(/* webpackChunkName: "about" */ '../views/LoginNext.vue')
+    path: '/home',
+    name: 'Home',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Home.vue')
   },
   {
     path: '/profilext',
