@@ -13,9 +13,9 @@
         </div>
       </div>
       <div class="shadow-lg">
-        <form action="/action_page.php" style="border: 1px solid #ccc">
+        <form @submit.prevent style="border: 1px solid #ccc">
           <div class="container">
-            <h1>Sign Up</h1>
+            <h1>Login In</h1>
             <hr />
 
             <label for="email" style="float: left;"><b>Email</b></label>
@@ -23,6 +23,7 @@
               type="text"
               placeholder="Enter Email"
               name="email"
+              v-model="LoginData.Username"
               required
             />
 
@@ -30,6 +31,7 @@
             <input
               type="password"
               placeholder="Enter Password"
+              v-model="LoginData.Password"
               name="psw"
               required
             />
@@ -45,7 +47,7 @@
             </label>
 
             <div class="clearfix">
-              <button type="submit" class="signupbtn shadow">Sign Up</button>
+              <button type="submit" @click="LoginSubmit" class="signupbtn shadow">Login</button>
             </div>
           </div>
         </form>
@@ -55,7 +57,36 @@
 </template>
 
 <script>
-export default {};
+import axios from 'axios'
+export default {
+  name: "LoginNext",
+  data() {
+    return {
+      LoginData : {
+        Username: "",
+        Password: ""
+      }
+    }
+  },
+  methods: {
+    LoginSubmit() {
+      axios.post('http://localhost:5000/login',this.LoginData)
+      .then(resp => {
+        console.log("resp data",resp.data)
+        if (resp.data.data == "null") {
+          this.LoginData.Username = ""
+          this.LoginData.Password = ""
+            this.$router.push('/')     
+        }else {
+          console.log("jjjj",resp.data.data)
+          this.$store.dispatch('LoginData',resp.data.data)
+          console.log("logindata",this.$store.state.loginDetail)
+          this.$router.push('home')
+        }
+      })
+    }
+  }
+};
 </script>
 
 <style scoped>

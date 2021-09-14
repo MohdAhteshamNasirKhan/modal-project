@@ -17,9 +17,10 @@
 
       <div class="header__right">
         <div class="header__option">
-          <span class="material-icons"> home </span>
-          <span class="material-icons"> post_add </span>
-          <span class="material-icons"> account_circle </span>
+          <span class="material-icons" @click="HomePage"> home </span>
+          <span class="material-icons" @click="AddPost"> post_add </span>
+          <span class="material-icons" @click="ProfileNext"> account_circle </span>
+          <span class="material-icons" @click="Logout"> exit_to_app</span>
         </div>
       </div>
     </div>
@@ -27,7 +28,24 @@
 </template>
 
 <script>
-export default {};
+export default {
+  name: "Navbar",
+  methods: {
+    Logout(){
+      // this.$store.state.loginDetail = ""
+      this.$router.push('/')
+    },
+    HomePage(){
+      this.$router.push('home')
+    },
+    AddPost(){
+      this.$router.push('post')
+    },
+    ProfileNext(){
+      this.$router.push('profilext')
+    }
+  }
+};
 </script>
 
 <style scoped>
