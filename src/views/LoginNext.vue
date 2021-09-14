@@ -47,7 +47,7 @@
             </label>
 
             <div class="clearfix">
-              <button type="submit" @click="LoginSubmit" class="signupbtn shadow">Login In</button>
+              <button type="submit" @click="LoginSubmit" class="signupbtn shadow">Login</button>
             </div>
           </div>
         </form>
@@ -72,13 +72,16 @@ export default {
     LoginSubmit() {
       axios.post('http://localhost:5000/login',this.LoginData)
       .then(resp => {
-        console.log(resp)
+        console.log("resp data",resp.data)
         if (resp.data.data == "null") {
           this.LoginData.Username = ""
           this.LoginData.Password = ""
             this.$router.push('/')     
         }else {
-          this.$router.push({name:'home',params: {Username:resp.data.data.Username}})
+          console.log("jjjj",resp.data.data)
+          this.$store.dispatch('LoginData',resp.data.data)
+          console.log("logindata",this.$store.state.loginDetail)
+          this.$router.push('home')
         }
       })
     }

@@ -138,7 +138,7 @@ export default {
   created() {
     axios.get("http://localhost:5000/allpost").then((res) => {
       this.users = res.data;
-      console.log(this.users);
+      console.log("all post data",this.users);
     });
   },
   methods: {

@@ -30,24 +30,19 @@
 <script>
 export default {
   name: "Navbar",
-   props:{
-    Username: String
-  },
-  created(){
-    localStorage.setItem('User',this.Username)
-  },
   methods: {
     Logout(){
+      // this.$store.state.loginDetail = ""
       this.$router.push('/')
     },
     HomePage(){
       this.$router.push('home')
     },
     AddPost(){
-      this.$router.push({name:'post',params: {Username:this.Username}})
+      this.$router.push('post')
     },
     ProfileNext(){
-      this.$router.push({name:'profilext',params: {Username:this.Username}})
+      this.$router.push('profilext')
     }
   }
 };

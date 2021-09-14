@@ -1,24 +1,31 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import createPersistedState from "vuex-persistedstate";
+// import createPersistedState from "vuex-persistedstate";
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-    plugins: [createPersistedState()],
+    // plugins: [createPersistedState()],
     state: {
-        studentData: ""
+        studentData: {},
+        loginDetail: {}
     },
     mutations: {
         setContent(state,res){
             state.studentData = res
         },
+        LoginDataSave(state,resp){
+            state.loginDetail = resp
+        }
         
     },
     actions: {
         SetUserContent(context,regData){
+            console.log("data",regData)
             context.commit('setContent',regData)
         },
-        
+        LoginData(context,LdapLoginData){
+            context.commit('LoginDataSave',LdapLoginData)
+        }
         // AddPost(context,blogdata) {
         //         axios.post('http://localhost:5001/createblog',blogdata)
         //         .then(resblogdata => {

@@ -1,6 +1,5 @@
 <template>
   <div>
-    <div>{{ $route.params.Username }}</div>
     <Navbar />
     <div class="container mt-4">
       <!-- <div>{{$router.params.Username}}</div> -->
@@ -60,12 +59,9 @@ export default {
   data() {
     return {
       fav: true,
-      check: true,
-
       UserContent: {
-        
-        Username: this.$route.params.Username,
-        
+        // Username: this.$route.params.Username,
+        Username: "",
       },
       // profile: [
       //   {
@@ -106,14 +102,15 @@ export default {
       },
     };
   },
-  mounted() {
+  created() {
     // if (this.check) {
     //       localStorage.setItem('Userda',  this.UserContent.Username)
     //       this.check = false
     // }
-    
-    this.$store.dispatch('SetUserContent',this.UserContent)
-    console.log(this.$store.state.studentData)
+    this.UserContent.Username = this.$store.state.loginDetail.Username
+
+    // this.$store.dispatch('SetUserContent',this.UserContent)
+    console.log("Username",this.UserContent.Username)
     axios
       .post("http://localhost:5000/getUser", this.UserContent)
       .then((res) => {
