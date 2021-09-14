@@ -2,6 +2,7 @@
   <div>
     <Navbar />
     <div class="d-flex flex-column align-items-center mt-5">
+      
       <form @submit.prevent enctype="multipart/form-data">
         <div
           class="d-flex flex-column align-items-center form-group background"
@@ -107,6 +108,7 @@ export default {
       axios.post('http://localhost:5000/create',this.postData)
       .then(response => {
         console.log(response.data)
+        this.$router.push('/home')
       })
     }
   }

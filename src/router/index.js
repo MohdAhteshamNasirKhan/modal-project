@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 // import Home from '../views/Home.vue'
-
+import ProfileExt from '../views/ProfileNext.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -40,18 +40,18 @@ const routes = [
   },
   {
     path: '/post',
-    name: 'Post',
+    name: 'post',
     component: () => import(/* webpackChunkName: "about" */ '../views/PostPage.vue')
   },
   {
     path: '/home',
-    name: 'Home',
+    name: 'home',
     component: () => import(/* webpackChunkName: "about" */ '../views/Home.vue')
   },
   {
     path: '/profilext',
-    name: 'Profilext',
-    component: () => import(/* webpackChunkName: "about" */ '../views/ProfileNext.vue')
+    name: 'profilext',
+    component: ProfileExt
   }
   
 

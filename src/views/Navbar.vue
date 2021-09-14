@@ -19,7 +19,7 @@
         <div class="header__option">
           <span class="material-icons" @click="HomePage"> home </span>
           <span class="material-icons" @click="AddPost"> post_add </span>
-          <span class="material-icons"> account_circle </span>
+          <span class="material-icons" @click="ProfileNext"> account_circle </span>
           <span class="material-icons" @click="Logout"> exit_to_app</span>
         </div>
       </div>
@@ -30,6 +30,12 @@
 <script>
 export default {
   name: "Navbar",
+   props:{
+    Username: String
+  },
+  created(){
+    localStorage.setItem('User',this.Username)
+  },
   methods: {
     Logout(){
       this.$router.push('/')
@@ -38,7 +44,10 @@ export default {
       this.$router.push('home')
     },
     AddPost(){
-      this.$router.push('post')
+      this.$router.push({name:'post',params: {Username:this.Username}})
+    },
+    ProfileNext(){
+      this.$router.push({name:'profilext',params: {Username:this.Username}})
     }
   }
 };

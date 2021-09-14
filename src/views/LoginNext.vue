@@ -73,8 +73,14 @@ export default {
       axios.post('http://localhost:5000/login',this.LoginData)
       .then(resp => {
         console.log(resp)
+        if (resp.data.data == "null") {
+          this.LoginData.Username = ""
+          this.LoginData.Password = ""
+            this.$router.push('/')     
+        }else {
+          this.$router.push({name:'home',params: {Username:resp.data.data.Username}})
+        }
       })
-       this.$router.push('home')
     }
   }
 };
