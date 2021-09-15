@@ -36,7 +36,7 @@
               required
             />
 
-            <label style="float: left;">
+            <!-- <label style="float: left;">
               <input
                 type="checkbox"
                 checked="checked"
@@ -44,9 +44,9 @@
                 style="margin-bottom: 15px"
               />
               Remember me
-            </label>
+            </label> -->
 
-            <div class="clearfix">
+            <div class="clearfix pt-4 pb-2">
               <button type="submit" @click="LoginSubmit" class="signupbtn shadow">Login</button>
             </div>
           </div>
@@ -79,7 +79,8 @@ export default {
             this.$router.push('/')     
         }else {
           console.log("jjjj",resp.data.data)
-          this.$store.dispatch('LoginData',resp.data.data)
+          this.$store.dispatch('LoginData',resp.data.data) //ldap ke liye uncomment kerna hai
+          // this.$store.dispatch('LoginData',resp.data)
           console.log("logindata",this.$store.state.loginDetail)
           this.$router.push('home')
         }

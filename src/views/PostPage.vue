@@ -49,9 +49,14 @@ export default {
   },
   data() {
     return {
+      UserContent: {
+        // Username: this.$route.params.Username,
+        Username: "",
+      },
       postData: {
         Name: "",
         Description: "",
+        UserId:"",
         // file: "",
         Contents: [
           
@@ -104,7 +109,11 @@ export default {
       // this.postData.Contents.push(this.cnt)
       //  this.cnt.ContentData.push(this.$refs.file.files[0]) 
       // this.postData.Contents.push(this.cnt)
-      
+      this.postData.Name = this.$store.state.loginDetail.Username
+      console.log("Name",this.postData.Name)
+      this.postData.UserId = this.$store.state.loginDetail.UserId
+      console.log("Name",this.postData.UserId)
+      // this.UserContent.Username = this.$store.state.loginDetail.Username
       axios.post('http://localhost:5000/create',this.postData)
       .then(response => {
         console.log(response.data)

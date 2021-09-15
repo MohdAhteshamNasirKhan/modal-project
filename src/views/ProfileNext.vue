@@ -23,26 +23,29 @@
               <kbd>{{ person.mailID }}</kbd>
             </div>
             <div style="margin-left: 10px" class="addPadding">
-              {{ person.number }}
+              Contact:{{ person.number }}
             </div>
             <div id="moveRight">{{ person.about }}</div>
           </div>
         </div>
       </div>
-      <!-- <div class="d-flex flex-column align-items-center">
-            <div id="posts" class="m-3">
-              <h2>Posts</h2>
-            </div>
-            <div
-             class="d-flex justify-content-center"
-             v-for="items in users"
-             :key="items.postID"
-            >
-                <div class="set" v-for="image in items.images" :key="image">
-                  <img id="imageSize" :src="image" alt="" />
-                 </div>
+      <div class="d-flex flex-column align-items-center">
+        <div id="posts" class="m-3">
+          <h2>Posts</h2>
+        </div>
+        <!-- <div
+          class="d-flex justify-content-center"
+        >
+            <div class="set" v-for="image in /*item1.contentdata*/ imageData" :key="image">
+              <img id="imageSize" :src="image" alt="" />
             </div>
         </div> -->
+        <div class="row">
+            <div class="set col-4" v-for="image in /*item1.contentdata*/ imageData" :key="image">
+              <img id="imageSize" :src="image" alt="" />
+            </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -100,6 +103,8 @@ export default {
         about: "",
         postContent: "",
       },
+      imageData:[],
+      contents: [],
     };
   },
   created() {
@@ -107,20 +112,39 @@ export default {
     //       localStorage.setItem('Userda',  this.UserContent.Username)
     //       this.check = false
     // }
-    this.UserContent.Username = this.$store.state.loginDetail.Username
-
+    this.UserContent.Username = this.$store.state.loginDetail.Username;
+    // this.UserContent.Username = this.$store.state.loginDetail.Username
+    // this.UserContent.Username = "govinds"
     // this.$store.dispatch('SetUserContent',this.UserContent)
-    console.log("Username",this.UserContent.Username)
+    console.log("Username", this.UserContent.Username);
     axios
       .post("http://localhost:5000/getUser", this.UserContent)
       .then((res) => {
         this.person = res.data;
-        this.person.mailID = res.data.Email
-        this.person.name = res.data.FirstName + " " + res.data.LastName
-        this.person.ProfilePic = res.data.ProfilePic
-        this.person.number = res.data.Mobile
+        this.person.mailID = res.data.Email;
+        this.person.name = res.data.FirstName + " " + res.data.LastName;
+        this.person.ProfilePic = res.data.ProfilePic;
+        this.person.number = res.data.Mobile;
         console.log(this.person);
       });
+    axios
+      .post("http://localhost:5000/getUserAllPost", this.UserContent)
+      .then((res) => {
+        console.log("get all post1 ", res.data);
+        this.contents = res.data;
+        console.log("get all post2 ", this.contents);
+        for(let key in this.contents){
+        
+        for(let key2 in this.contents[key].contents){
+            
+            for (let key3 in this.contents[key].contents[key2].contentdata){
+                console.log("2",this.contents[key].contents[key2].contentdata[key3])
+                this.imageData.push(this.contents[key].contents[key2].contentdata[key3])
+            }
+        }
+      }
+      });
+      
   },
 };
 </script>
@@ -130,8 +154,15 @@ export default {
 
 .container {
   font-family: "Inter", sans-serif;
+  overflow-x: auto;
 }
 
+#profilePic {
+  background-image: url(https://www.kindpng.com/picc/m/21-214439_free-high-quality-person-icon-default-profile-picture.png);
+  background-size: 550px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
 #profileBox {
   background-color: rgb(241, 247, 247);
 }
