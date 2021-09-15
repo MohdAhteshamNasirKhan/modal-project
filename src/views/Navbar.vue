@@ -9,10 +9,10 @@
       </div>
 
       <div class="header__middle">
-        <div class="header__input">
+        <!-- <div class="header__input">
           <span class="material-icons"> search </span>
           <input type="text" placeholder="Search Employees" />
-        </div>
+        </div> -->
       </div>
 
       <div class="header__right">

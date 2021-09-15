@@ -19,7 +19,7 @@
             />
           </div>
           <div class="pt-3">
-            <h4 class="profileText">{{ user.name }}ram</h4>
+            <h4 class="profileText">{{ user.name }}</h4>
           </div>
         </div>
 
@@ -67,7 +67,7 @@
           <div>
             <span class="material-icons other"> chat_bubble_outline </span>
           </div>
-          <div><span class="material-icons other"> share_outline </span></div>
+          <!-- <div><span class="material-icons other"> share_outline </span></div> -->
         </div>
 
         <div
@@ -85,6 +85,10 @@
           </div>
           <div>
             <h6>Comments</h6>
+            <span v-for="comment in commentdatabase" :key="comment">
+              {{comment.CommentData}}
+            </span><br>
+            <!-- <span>{{comment.Username}}</span> -->
           </div>
         </div>
         <form class="form-inline" @submit.prevent>
@@ -129,7 +133,10 @@ export default {
         CommentDate: "",
         Username: "",
         CommentId: ""
-      } 
+      } ,
+      commentdatabase: {
+        
+      }
     };
   },
    props:{
@@ -177,6 +184,7 @@ export default {
       console.log("user comment data", this.comments)
       axios.post("http://localhost:5000/comment", this.comments).then((res) => {
         console.log(res.data);
+        this.commentdatabase = res.data
       });
     },
   },
